@@ -138,6 +138,8 @@ while gestionar_matriculas == True:
             print()
 
             v_nombre_ramo = input("Ingrese el nombre del ramo: ")
+
+            print()
         
         try:
             
@@ -145,6 +147,7 @@ while gestionar_matriculas == True:
             
             ramo = Ramo(v_id_ramo, v_nombre_ramo)
             ramo.guardar_ramo()
+            print()
             print("Ramo Guardado! Para verlo selecciona la opción del menú: Mostrar ramos existentes")
             print()
         except FileNotFoundError as file_not_found:
@@ -156,28 +159,43 @@ while gestionar_matriculas == True:
     elif ingreso_opcion == "4": # AGREGAR ALUMNO
         
         nombre_alumno = input("Ingrese el nombre del alumno: ")
+        
+        print()
 
         while nombre_alumno == "":
 
             print("El nombre está vacío por favor completalo!")
+            print()
 
             nombre_alumno = input("Ingrese el nombre del alumno: ")
 
+            print()
+
         rut_alumno = input("Ingrese el RUT del alumno: ")
+
+        print()
 
         while rut_alumno == "":
 
             print("El RUT está vacío por favor completalo!")
+            print()
 
             rut_alumno = input("Ingrese el RUT del alumno: ")
 
+            print()
+
         ramo_alumno = input("Ingrese el ramo del alumno: ")
+
+        print()
 
         while ramo_alumno == "":
 
             print("El ramo está vacío por favor completalo!")
+            print()
 
             nombre_alumno = input("Ingrese el ramo del alumno: ")
+
+            print()
         
         try:
             alumno = Alumno(nombre_alumno, rut_alumno, ramo_alumno)
@@ -197,14 +215,19 @@ while gestionar_matriculas == True:
         try:
             rut_alumno = input("Ingrese el RUT del alumno al que desea agregar el ramo: ").strip()
 
+            print()
+
             while rut_alumno == "":
                 
                 print("Campo de RUT vacío por favor ingresa de nuevo un RUT!")
                 print()
 
                 rut_alumno = input("Ingrese el RUT del alumno al que desea agregar el ramo: ").strip()
+                print()
             
             nuevo_ramo = input("Ingrese el nombre del ramo a agregar: ").strip()
+
+            print()
 
             while nuevo_ramo == "":
                 
@@ -212,6 +235,7 @@ while gestionar_matriculas == True:
                 print()
 
                 nuevo_ramo = input("Ingrese el nombre del ramo a agregar: ").strip()
+                print()
             
             # LEER ALUMNOS DEL ARCHIVO
             alumnos = []
@@ -233,28 +257,43 @@ while gestionar_matriculas == True:
                     break
                 
             if not encontrado:
-                print(f"No se encontró un alumno con RUT {rut_alumno}.\n")
+                print(f"No se encontró un alumno con RUT {rut_alumno}.")
             else:
                 with open("alumnos.csv", "w") as f:
                     for nombre, rut, ramos in alumnos:
                         f.write(f"Nombre: {nombre}, RUT: {rut}, Ramos Inscritos: {ramos}\n")
-                print("Ramo agregado correctamente al alumno!\n")
+                print("Ramo agregado correctamente al alumno!")
 
             print()
         except Exception as e:
             print(f"Error al agregar ramo al alumno! Detalle: {e}")
+            print()
+
     elif ingreso_opcion == "6": # ELIMINAR RAMO A ALUMNO....
 
         try:
             rut_alumno = input("Ingrese el RUT del alumno al que desea eliminar un ramo: ").strip()
+
+            print()
+
             while rut_alumno == "":
-                print("Campo de RUT vacío, por favor ingresa un RUT válido!\n")
+                
+                print("Campo de RUT vacío, por favor ingresa un RUT válido!")
+                print()
+
                 rut_alumno = input("Ingrese el RUT del alumno al que desea eliminar un ramo: ").strip()
+                print()
             
             ramo_eliminar = input("Ingrese el nombre del ramo a eliminar: ").strip()
+
+            print()
+
             while ramo_eliminar == "":
-                print("Campo de Ramo vacío, por favor ingresa un Ramo válido!\n")
+                print("Campo de Ramo vacío, por favor ingresa un Ramo válido!")
+                print()
+
                 ramo_eliminar = input("Ingrese el nombre del ramo a eliminar: ").strip()
+                print()
             
             # LEER ALUMNOS DEL ARCHIVO
             alumnos = []
@@ -272,14 +311,14 @@ while gestionar_matriculas == True:
                     if ramo_eliminar in ramos_list:
                         ramos_list.remove(ramo_eliminar)
                         alumnos[i][2] = "; ".join(ramos_list)
-                        print(f"Ramo '{ramo_eliminar}' eliminado correctamente del alumno.\n")
+                        print(f"Ramo '{ramo_eliminar}' eliminado correctamente del alumno.")
                     else:
-                        print(f"El alumno no tiene registrado el ramo '{ramo_eliminar}'.\n")
+                        print(f"El alumno no tiene registrado el ramo '{ramo_eliminar}'.")
                     encontrado = True
                     break
             
             if not encontrado:
-                print(f"No se encontró un alumno con RUT {rut_alumno}.\n")
+                print(f"No se encontró un alumno con RUT {rut_alumno}.")
             else:
                 with open("alumnos.csv", "w") as f:
                     for nombre, rut, ramos in alumnos:
